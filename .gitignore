@@ -1,0 +1,19 @@
+# Xcode files
+*.xcuserdata
+*.xcworkspace
+
+# Build artifacts
+DerivedData/
+build/
+
+# Swift Package Manager
+/.build/
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Logs and temporary files
+*.log
+*.swp
+*.DS_Store
