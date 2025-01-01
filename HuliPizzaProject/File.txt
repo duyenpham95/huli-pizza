@@ -1,0 +1,2 @@
+Add new view: 
+File -> new File (Command + N)
