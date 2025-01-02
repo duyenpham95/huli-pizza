@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MenuItemView: View {
+    @State private var addedItem:Bool = false
+    
     var body: some View {
         VStack {
             HStack {
@@ -39,7 +41,18 @@ struct MenuItemView: View {
                     Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.").font(.custom("Georgia", size: 18, relativeTo: .body))
                 }
             }
-
+            Button{
+                addedItem = true
+            }label: {
+                Spacer()
+                Text(12.99, format:.currency(code: "USD")).bold()
+                Image(systemName: addedItem ? "cart.fill.badge.plus" : "cart.badge.plus")
+                Spacer()
+            }
+            .padding()
+            .background(.red, in:Capsule())
+            .foregroundStyle(.white)
+            .padding(5)
         }
     }
 }
