@@ -18,6 +18,9 @@ struct MenuGridView: View {
                 LazyVGrid(columns: columnLayout){
                     ForEach(menu){ item in
                         MenuItemTileView(menuItem: item)
+                            .onTapGesture(count: 2){
+                                selectedItem = item
+                            }
                     }
                 }
             }
