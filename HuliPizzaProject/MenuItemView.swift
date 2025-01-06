@@ -9,17 +9,18 @@ import SwiftUI
 
 struct MenuItemView: View {
     @State private var addedItem:Bool = false
-    
+    @Binding var item:MenuItem
+    @ObservedObject var orders:OrderModel
     var body: some View {
         VStack {
             HStack {
-                Text("Margherita")
+                Text(item.name)
                     .font(.title)
                     .fontWeight(.semibold)
                     .foregroundStyle(.ultraThickMaterial)
                     .padding(.leading)
                    
-                if let image = UIImage(named: "0x_lg"){
+                if let image = UIImage(named: "\(item.id)_lg"){
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
@@ -38,17 +39,19 @@ struct MenuItemView: View {
             VStack {
           
                 ScrollView {
-                    Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.").font(.custom("Georgia", size: 18, relativeTo: .body))
+                    Text(item.description).font(.custom("Georgia", size: 18, relativeTo: .body))
                 }
             }
             Button{
                 addedItem = true
+                orders.addOrder(item, quantity: 1)
             }label: {
                 Spacer()
-                Text(12.99, format:.currency(code: "USD")).bold()
+                Text(item.price, format:.currency(code: "USD")).bold()
                 Image(systemName: addedItem ? "cart.fill.badge.plus" : "cart.badge.plus")
                 Spacer()
             }
+            .disabled(item.id < 0)
             .padding()
             .background(.red, in:Capsule())
             .foregroundStyle(.white)
@@ -58,5 +61,5 @@ struct MenuItemView: View {
 }
 
 #Preview {
-    MenuItemView()
+    MenuItemView(item: .constant(testMenuItem), orders: OrderModel())
 }
