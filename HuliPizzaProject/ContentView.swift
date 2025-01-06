@@ -12,7 +12,7 @@ struct ContentView: View {
     @StateObject var orders:OrderModel = OrderModel()
     @State private var showOrders:Bool = false
     @State private var selectedItem: MenuItem = noMenuItem
-    @State private var presentGrid:Bool = true
+    @State private var presentGrid:Bool = false
     var body: some View {
         TabView {
             VStack {
