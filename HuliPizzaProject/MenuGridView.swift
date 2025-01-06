@@ -35,9 +35,12 @@ struct MenuGridView: View {
                     ForEach(menu){ item in
                         if !favorites.contains(item.id){
                             MenuItemTileView(menuItem: item)
+                                .animation(.easeOut, value: favorites)
                                 .onTapGesture(count:2) {
                                     if !favorites.contains(item.id){
-                                        favorites.append(item.id)
+                                        withAnimation(.easeInOut) {
+                                            favorites.append(item.id)
+                                        }
                                     }
                                 }
                                 .onTapGesture {
@@ -51,6 +54,7 @@ struct MenuGridView: View {
                 }
             }
         }
+        .animation(.easeOut(duration: 0.5), value: favorites)
     }
 }
 
